@@ -4,7 +4,8 @@ import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native
 
 export default function App() {
    const [conteo, setConteo] = useState(0);
-   const [sonido, setSonido] = useState(null);
+   // Reemplaza tu línea actual del useState de sonido por esta:
+   const [sonido, setSonido] = useState<Audio.Sound | null>(null);
    
    // Variable de animación para la escala del botón
    const scaleAnim = useRef(new Animated.Value(1)).current;
