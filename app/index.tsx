@@ -19,9 +19,8 @@ export default function App() {
    useEffect(() => {
      async function cargarSonido() {
        const { sound } = await Audio.Sound.createAsync(
-         // Puedes usar un link directo a un archivo de audio de internet para pruebas rápidas
-         { uri: "https://www.soundjay.com/buttons/sounds/button-16.mp3" }
-       );
+        require("./../assets/images/button-sound.mp3") // Apunta directamente a tu archivo local
+      );
        setSonido(sound);
      }
      cargarSonido();
