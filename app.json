@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MiApp",
-    "slug": "MiApp",
+    "name": "tap-app",
+    "slug": "tap-app",
     "projectId": "9e628ca6-b987-42c2-b24f-695165ea3d26",
     "version": "1.0.0",
     "orientation": "portrait",
