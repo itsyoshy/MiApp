@@ -5,7 +5,7 @@
     "projectId": "9e628ca6-b987-42c2-b24f-695165ea3d26",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/TAP!.png",
+    "icon": "./assets/images/tap-icon.png",
     "scheme": "miapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
