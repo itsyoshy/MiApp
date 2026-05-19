@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "MiApp",
-    "slug": "MiApp",
+    "name": "tap-app",
+    "slug": "tap-app",
+    "projectId": "9e628ca6-b987-42c2-b24f-695165ea3d26",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/TAP!.png",
@@ -9,7 +10,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yoshy.tapapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -18,6 +20,7 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
+      "package": "com.yoshy.tapapp",
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
@@ -43,6 +46,11 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9e628ca6-b987-42c2-b24f-695165ea3d26"
+      }
     }
   }
 }
