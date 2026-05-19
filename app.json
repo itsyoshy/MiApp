@@ -4,7 +4,7 @@
     "slug": "MiApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/TAP!.png",
     "scheme": "miapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
