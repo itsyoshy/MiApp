@@ -17,19 +17,17 @@ export default function App() {
    // Cargar el sonido local de forma limpia al abrir la app
    useEffect(() => {
      async function cargarSonido() {
-       try {
-         const { sound } = await Audio.Sound.createAsync(
-           // Ajustado con '../' para salir correctamente de la carpeta app/
-           require("../assets/images/button-sound.mp3") 
-         );
-         setSonido(sound);
-       } catch (error) {
-         console.log("Error cargando el archivo de audio:", error);
-       }
+       // IMPORTANTE: Asegúrate de que el archivo en tu carpeta assets/images 
+       // se llame exactamente "button-sound.mp3". Si se llama diferente, cámbialo aquí abajo.
+       const { sound } = await Audio.Sound.createAsync(
+         require("../assets/images/button-sound.mp3") 
+       );
+       setSonido(sound);
      }
+     
      cargarSonido();
 
-     // Limpieza de memoria
+     // Limpieza de memoria al cerrar la app
      return () => {
        if (sonido) {
          sonido.unloadAsync();
@@ -41,10 +39,12 @@ export default function App() {
    const manejarPresion = async () => {
      setConteo(conteo + 1);
 
+     // Ejecutar sonido de forma inmediata (Spam-proof)
      if (sonido) {
        await sonido.replayAsync(); 
      }
 
+     // Secuencia de animación tipo resorte
      Animated.sequence([
        Animated.timing(scaleAnim, {
          toValue: 1.2,
@@ -75,7 +75,7 @@ export default function App() {
           </TouchableOpacity>
         </Animated.View>
 
-        {/* Texto de créditos fijado en la parte inferior */}
+        {/* Texto de créditos fijo en la parte inferior */}
         <Text style={styles.creditos}>Sound from Zapsplat</Text>
       </View>
    );
@@ -112,10 +112,10 @@ const styles = StyleSheet.create({
       fontSize: 45,
     },
     creditos: {
-      position: 'absolute', // Saca al elemento del flujo normal y lo deja flotando
-      bottom: 30,           // Lo separa 30 píxeles del borde inferior de la pantalla
-      fontSize: 12,         // Tamaño pequeño y discreto
-      color: '#666',        // Color grisáceo para que no compita visualmente con el botón
-      letterSpacing: 0.5,   // Un ligero espaciado entre letras elegante
+      position: 'absolute', 
+      bottom: 40,           
+      fontSize: 12,         
+      color: '#666',        
+      letterSpacing: 0.5,   
     }
   });
