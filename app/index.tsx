@@ -1,10 +1,9 @@
-import { Audio } from "expo-av"; // Importamos el módulo de audio
+import { Audio } from "expo-av";
 import React, { useEffect, useRef, useState } from "react";
 import { Animated, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function App() {
    const [conteo, setConteo] = useState(0);
-   // Reemplaza tu línea actual del useState de sonido por esta:
    const [sonido, setSonido] = useState<Audio.Sound | null>(null);
    
    // Variable de animación para la escala del botón
@@ -15,17 +14,22 @@ export default function App() {
    const colordeFondo = `hsl(${hue}, 100%, 90%)`; 
    const colorBoton = `hsl(${hue}, 70%, 50%)`;   
 
-   // EFECTO: Pre-cargar el sonido en memoria al abrir la app (Buenas prácticas de rendimiento)
+   // Cargar el sonido local de forma limpia al abrir la app
    useEffect(() => {
      async function cargarSonido() {
-       const { sound } = await Audio.Sound.createAsync(
-        require("./../assets/images/newsound.mp3") // Apunta directamente a tu archivo local
-      );
-       setSonido(sound);
+       try {
+         const { sound } = await Audio.Sound.createAsync(
+           // Ajustado con '../' para salir correctamente de la carpeta app/
+           require("../assets/images/button-sound.mp3") 
+         );
+         setSonido(sound);
+       } catch (error) {
+         console.log("Error cargando el archivo de audio:", error);
+       }
      }
      cargarSonido();
 
-     // Limpieza de memoria al cerrar la app (Previene memory leaks)
+     // Limpieza de memoria
      return () => {
        if (sonido) {
          sonido.unloadAsync();
@@ -33,16 +37,14 @@ export default function App() {
      };
    }, []);
 
-   // Función que maneja el click: Cuenta + Anima + Suena
+   // Manejador del click (Cuenta, Suena y Anima)
    const manejarPresion = async () => {
      setConteo(conteo + 1);
 
-     // 1. Reproducir el sonido cargado
      if (sonido) {
-       await sonido.replayAsync(); // Replay resetea el audio al inicio por si das taps muy rápidos
+       await sonido.replayAsync(); 
      }
 
-     // 2. Ejecutar secuencia de animación (Crecer y encoger con efecto resorte)
      Animated.sequence([
        Animated.timing(scaleAnim, {
          toValue: 1.2,
@@ -72,6 +74,9 @@ export default function App() {
             <Text style={styles.interruptor}>Tap</Text>
           </TouchableOpacity>
         </Animated.View>
+
+        {/* Texto de créditos fijado en la parte inferior */}
+        <Text style={styles.creditos}>Sound from Zapsplat</Text>
       </View>
    );
 };
@@ -105,5 +110,12 @@ const styles = StyleSheet.create({
       color: '#ffffff',
       fontWeight: 'bold',
       fontSize: 45,
+    },
+    creditos: {
+      position: 'absolute', // Saca al elemento del flujo normal y lo deja flotando
+      bottom: 30,           // Lo separa 30 píxeles del borde inferior de la pantalla
+      fontSize: 12,         // Tamaño pequeño y discreto
+      color: '#666',        // Color grisáceo para que no compita visualmente con el botón
+      letterSpacing: 0.5,   // Un ligero espaciado entre letras elegante
     }
   });
