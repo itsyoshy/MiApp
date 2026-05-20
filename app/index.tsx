@@ -19,7 +19,7 @@ export default function App() {
    useEffect(() => {
      async function cargarSonido() {
        const { sound } = await Audio.Sound.createAsync(
-        require("./../assets/images/button-sound.wav") // Apunta directamente a tu archivo local
+        require("./../assets/images/newsound.mp3") // Apunta directamente a tu archivo local
       );
        setSonido(sound);
      }
