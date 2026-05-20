@@ -20,7 +20,7 @@ export default function App() {
        // IMPORTANTE: Asegúrate de que el archivo en tu carpeta assets/images 
        // se llame exactamente "button-sound.mp3". Si se llama diferente, cámbialo aquí abajo.
        const { sound } = await Audio.Sound.createAsync(
-         require("../assets/images/button-sound.mp3") 
+         require("../assets/images/newsound.mp3") 
        );
        setSonido(sound);
      }
